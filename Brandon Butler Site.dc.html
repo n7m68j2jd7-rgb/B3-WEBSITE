@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<script src="./image-slot.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #E9E7DF; }
+  * { box-sizing: border-box; }
+  a { color: #4A5535; text-decoration: none; }
+  a:hover { color: #191A16; }
+  @keyframes bbMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .bb-nav-burger { display: none; }
+  @media (max-width: 760px) {
+    .bb-nav-desktop { display: none !important; }
+    .bb-nav-burger { display: flex !important; }
+    [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    [style*="min-height:88vh"],
+    [style*="min-height:86vh"],
+    [style*="min-height:84vh"] { min-height: 0 !important; }
+    [style*="min-height:60vh"] { min-height: 320px !important; }
+  }
+</style>
+</helmet>
+
+<div style="background:#E9E7DF;color:#191A16;font-family:'Barlow',sans-serif;overflow-x:hidden">
+
+  <div style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 5vw;background:rgba(233,231,223,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(25,26,22,.14);box-shadow:0 1px 0 rgba(201,166,58,.5)">
+    <div onClick="{{ goHome }}" style="cursor:pointer;display:flex;align-items:center;gap:10px">
+      <img src="./assets/ocramed-logo.png" alt="B3 logo" style="height:60px;width:auto;display:block">
+    </div>
+    <div class="bb-nav-desktop" style="display:flex;align-items:center;gap:2px;flex-wrap:nowrap;min-width:0">
+      <div onClick="{{ goHome }}" style="cursor:pointer;padding:10px clamp(6px,.9vw,14px);font-size:clamp(10px,.85vw,12px);font-weight:800;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap">Home</div>
+      <div onClick="{{ goBook }}" style="cursor:pointer;padding:10px clamp(6px,.9vw,14px);font-size:clamp(10px,.85vw,12px);font-weight:800;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap">The Book</div>
+      <div onClick="{{ goCoaching }}" style="cursor:pointer;padding:10px clamp(6px,.9vw,14px);font-size:clamp(10px,.85vw,12px);font-weight:800;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap">Athlete Coaching</div>
+      <div onClick="{{ goPodcast }}" style="cursor:pointer;padding:10px clamp(6px,.9vw,14px);font-size:clamp(10px,.85vw,12px);font-weight:800;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap">Podcast</div>
+      <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;cursor:pointer;margin-left:8px;padding:14px clamp(12px,1.4vw,22px);font-size:clamp(10px,.85vw,12px);background:transparent;border:1px solid rgba(25,26,22,.35);color:#191A16;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Work With Brandon</a>
+    </div>
+    <div class="bb-nav-burger" onClick="{{ toggleNav }}" style="align-items:center;justify-content:center;width:38px;height:38px;cursor:pointer;flex:0 0 auto;color:#191A16">
+      <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg>
+      </sc-if>
+      <sc-if value="{{ !navOpen }}" hint-placeholder-val="{{ true }}">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg>
+      </sc-if>
+    </div>
+  </div>
+  <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:sticky;top:70px;z-index:49;display:flex;flex-direction:column;background:#E9E7DF;border-bottom:1px solid rgba(25,26,22,.14);box-shadow:0 12px 24px rgba(16,17,9,.12)">
+      <div onClick="{{ goHome }}" style="cursor:pointer;padding:18px 5vw;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid rgba(25,26,22,.1)">Home</div>
+      <div onClick="{{ goBook }}" style="cursor:pointer;padding:18px 5vw;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid rgba(25,26,22,.1)">The Book</div>
+      <div onClick="{{ goCoaching }}" style="cursor:pointer;padding:18px 5vw;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid rgba(25,26,22,.1)">Athlete Coaching</div>
+      <div onClick="{{ goPodcast }}" style="cursor:pointer;padding:18px 5vw;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid rgba(25,26,22,.1)">Podcast</div>
+      <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent" style="transition:background .35s,color .35s,border-color .35s;display:block;cursor:pointer;margin:16px 5vw 20px;padding:16px 22px;text-align:center;background:transparent;border:1px solid rgba(25,26,22,.35);color:#191A16;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Work With Brandon</a>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div>
+
+    <div style="position:relative;overflow:hidden;color:#E9E7DF;min-height:88vh;display:flex;flex-direction:column">
+      <image-slot id="bb-hero-portrait" src="./assets/home-hero.jpg" style="position:absolute;inset:0;width:100%;height:100%;z-index:0" shape="rect" placeholder="Drop Brandon's hero background photo"></image-slot>
+      <div style="position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(100deg,#0C0D08 0%,rgba(12,13,8,.86) 28%,rgba(12,13,8,.5) 50%,rgba(12,13,8,.15) 72%,rgba(12,13,8,0) 90%)"></div>
+      <div style="position:relative;z-index:2;flex:1;min-width:0;padding:96px 5vw 72px;display:flex;flex-direction:column;justify-content:center;gap:34px">
+        <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:#C9A63A">Coach · Mentor · Author</div>
+        <h1 style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(48px,7.4vw,132px);line-height:.88;text-transform:uppercase;letter-spacing:-.02em;text-wrap:balance">
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="0" style="display:inline-block;line-height:1.12">Built</span></span>
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="70" style="display:inline-block;line-height:1.12">To</span></span>
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="140" style="display:inline-block;line-height:1.12;background-image:linear-gradient(96deg,#C9A63A 0%,#EBDC9A 55%,#C9A63A 100%);background-clip:text;color:transparent">Become</span></span>
+          <br />
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="230" style="display:inline-block;line-height:1.12">Who You Were</span></span>
+          <br />
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="320" style="display:inline-block;line-height:1.12">Made To Be.</span></span>
+        </h1>
+        <p data-anim="up" data-delay="380" style="margin:0;max-width:52ch;font-size:22px;line-height:1.48;letter-spacing:-.005em;color:rgba(233,231,223,.78)">Retired First Sergeant. Coach. Author. I train athletes, mentor people through hard transitions, and hold everyone — including myself — to a standard.</p>
+        <div data-anim="up" data-delay="460" style="display:flex;flex-wrap:wrap;gap:14px">
+          <div style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;cursor:pointer;padding:20px 34px;background:transparent;border:1px solid rgba(233,231,223,.45);color:#E9E7DF;white-space:nowrap;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Read My Story</div>
+          <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;cursor:pointer;padding:20px 34px;background:transparent;border:1px solid rgba(233,231,223,.45);color:#E9E7DF;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Book Brandon</a>
+        </div>
+      </div>
+      <div style="position:relative;z-index:2;border-top:1px solid rgba(233,231,223,.16);overflow:hidden;padding:16px 0">
+        <div style="display:flex;width:max-content;animation:bbMarquee 34s linear infinite;font-family:'Anton',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.06em;color:rgba(233,231,223,.5)">
+          <span style="padding-right:40px">Purpose</span><span style="padding-right:40px;color:#8E9977">·</span>
+          <span style="padding-right:40px">Discipline</span><span style="padding-right:40px;color:#8E9977">·</span>
+          <span style="padding-right:40px">Legacy</span><span style="padding-right:40px;color:#8E9977">·</span>
+          <span style="padding-right:40px">Believe. Build. Become.</span><span style="padding-right:40px;color:#8E9977">·</span>
+          <span style="padding-right:40px">Purpose</span><span style="padding-right:40px;color:#8E9977">·</span>
+          <span style="padding-right:40px">Discipline</span><span style="padding-right:40px;color:#8E9977">·</span>
+          <span style="padding-right:40px">Legacy</span><span style="padding-right:40px;color:#8E9977">·</span>
+          <span style="padding-right:40px">Believe. Build. Become.</span><span style="padding-right:40px;color:#8E9977">·</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#E9E7DF">
+      <div style="display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:start;max-width:1500px;margin:0 auto">
+        <div>
+          <div data-anim="up" style="font-size:12px;font-weight:800;letter-spacing:.36em;text-transform:uppercase;color:#5C6B36">The Reason</div>
+          <h2 data-anim="up" data-delay="60" style="margin:14px 0 0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(40px,5vw,88px);line-height:.92;text-transform:uppercase;letter-spacing:-.02em">Why I<br />Do This</h2>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:32px">
+          <p data-anim="up" data-delay="120" style="margin:0;font-family:'Instrument Serif',serif;font-size:clamp(26px,2.7vw,44px);line-height:1.22;letter-spacing:-.01em">"I spent my career finding out what people are made of under pressure. Now I use that to help them find their purpose, do the work, and build something that can take a hit and keep standing."</p>
+          <p data-anim="up" data-delay="200" style="margin:0;max-width:62ch;font-size:19px;line-height:1.65;color:rgba(25,26,22,.72)">Purpose isn't a mood, it's a decision. I made mine in uniform. I make it again every day as a coach and a father. This site exists because I think you can make the same call.</p>
+          <div onClick="{{ scrollToMission }}" data-anim="up" data-delay="260" style="display:inline-flex;align-items:center;gap:12px;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#4A5535;cursor:pointer">Read the full mission statement <span style="width:34px;height:1px;background:#4A5535;display:inline-block"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bb-mission" style="padding:130px 5vw;background:#191A16;color:#E9E7DF">
+      <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+        <div>
+          <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:#C9A63A">My mission and creed</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#8E9977">Personal creed:</div>
+          <p data-anim="up" data-delay="60" style="margin:0;font-family:'Instrument Serif',serif;font-size:clamp(24px,2.4vw,36px);line-height:1.32">I exist to build transformational relationships that help people discover their purpose, become their best, and create stronger families, leaders, and communities.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#8E9977">Brandon Butler's Personal Mission Statement:</div>
+          <p data-anim="up" data-delay="60" style="margin:0;font-size:19px;line-height:1.7;color:rgba(233,231,223,.85)">I am called to live with purpose by using my God-given gifts to build transformational relationships through every opportunity, platform, and season of my life. Whether through coaching, mentoring, leadership, business, writing, speaking, or serving my community, my mission remains the same: to help people discover their purpose, navigate transition, and become the best version of themselves.</p>
+          <p data-anim="up" data-delay="120" style="margin:0;font-size:19px;line-height:1.7;color:rgba(233,231,223,.85)">I will intentionally invest my time, knowledge, leadership, and influence into people, families, communities, and organizations where I can create lasting transformation. I measure success not by accolades, titles, or income, but by the lives that are changed, the leaders that are developed, and the relationships that are strengthened because I chose to serve.</p>
+          <p data-anim="up" data-delay="180" style="margin:0;font-size:19px;line-height:1.7;color:rgba(233,231,223,.85)">I will build a legacy that begins at home by loving, leading, protecting, and providing for my family while creating opportunities that impact future generations. I will pursue financial stability not as an end in itself, but as the freedom to live my purpose, serve others with excellence, and be fully present for the people who matter most.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <p data-anim="up" style="margin:0;font-size:19px;line-height:1.7;color:rgba(233,231,223,.85)">Every decision I make will be filtered through three questions:</p>
+          <div style="display:flex;flex-direction:column;border-top:1px solid rgba(233,231,223,.2)">
+            <div data-anim="up" data-delay="60" style="padding:22px 0;border-bottom:1px solid rgba(233,231,223,.2);font-size:20px;line-height:1.4">Does this align with my purpose?</div>
+            <div data-anim="up" data-delay="120" style="padding:22px 0;border-bottom:1px solid rgba(233,231,223,.2);font-size:20px;line-height:1.4">Does this allow me to serve others well?</div>
+            <div data-anim="up" data-delay="180" style="padding:22px 0;border-bottom:1px solid rgba(233,231,223,.2);font-size:20px;line-height:1.4">Does this strengthen my family and the legacy I am building?</div>
+          </div>
+        </div>
+
+        <div style="margin-top:10px;padding-top:36px;border-top:1px solid rgba(233,231,223,.2);display:flex;flex-direction:column;gap:16px">
+          <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#8E9977">All in compass:</div>
+          <p data-anim="up" data-delay="60" style="margin:0;font-family:'Instrument Serif',serif;font-size:clamp(22px,2.2vw,32px);line-height:1.32;color:#E9E7DF">My goal is not simply to achieve success, but to create transformational relationships that inspire purpose, develop leaders, strengthen families, and leave a legacy that outlives me.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#4A5535;color:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto">
+        <h2 data-anim="up" style="margin:0 0 60px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(36px,4.4vw,76px);line-height:.95;text-transform:uppercase">Three Pillars</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(233,231,223,.25)">
+          <div data-anim="up" data-delay="80" style="background:#4A5535;padding:44px 36px 52px;display:flex;flex-direction:column;gap:18px">
+            <div style="font-family:'Anton',sans-serif;font-size:64px;line-height:1;color:rgba(233,231,223,.35)">01</div>
+            <div style="font-family:'Anton',sans-serif;font-size:34px;text-transform:uppercase;line-height:1">Coach</div>
+            <p style="margin:0;font-size:18px;line-height:1.6;color:rgba(233,231,223,.82)">Building complete athletes and leaders, physically and mentally.</p>
+          </div>
+          <div data-anim="up" data-delay="170" style="background:#4A5535;padding:44px 36px 52px;display:flex;flex-direction:column;gap:18px">
+            <div style="font-family:'Anton',sans-serif;font-size:64px;line-height:1;color:rgba(233,231,223,.35)">02</div>
+            <div style="font-family:'Anton',sans-serif;font-size:34px;text-transform:uppercase;line-height:1">Mentor</div>
+            <p style="margin:0;font-size:18px;line-height:1.6;color:rgba(233,231,223,.82)">Walking with people through transition and purpose.</p>
+          </div>
+          <div data-anim="up" data-delay="260" style="background:#4A5535;padding:44px 36px 52px;display:flex;flex-direction:column;gap:18px">
+            <div style="font-family:'Anton',sans-serif;font-size:64px;line-height:1;color:rgba(233,231,223,.35)">03</div>
+            <div style="font-family:'Anton',sans-serif;font-size:34px;text-transform:uppercase;line-height:1">Author &amp; Speaker</div>
+            <p style="margin:0;font-size:18px;line-height:1.6;color:rgba(233,231,223,.82)">Sharing the message through Built to Become and public speaking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:130px 5vw;background:#191A16;color:#E9E7DF">
+      <div style="max-width:1300px;margin:0 auto;display:flex;flex-direction:column;gap:44px">
+        <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:#C9A63A">The Compass</div>
+        <p data-anim="up" data-delay="60" style="margin:0;max-width:70ch;font-size:20px;line-height:1.6;color:rgba(233,231,223,.72)">Every relationship I build is filtered through three questions.</p>
+        <div style="display:flex;flex-direction:column;border-top:1px solid rgba(233,231,223,.2)">
+          <div data-anim="up" data-delay="120" style="padding:30px 0;border-bottom:1px solid rgba(233,231,223,.2);font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(28px,3.6vw,60px);line-height:1.05;text-transform:uppercase">Does this align with purpose?</div>
+          <div data-anim="up" data-delay="200" style="padding:30px 0;border-bottom:1px solid rgba(233,231,223,.2);font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(28px,3.6vw,60px);line-height:1.05;text-transform:uppercase">Does this serve others well?</div>
+          <div data-anim="up" data-delay="280" style="padding:30px 0;border-bottom:1px solid rgba(233,231,223,.2);font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(28px,3.6vw,60px);line-height:1.05;text-transform:uppercase;color:#8E9977">Does this strengthen family and legacy?</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#E9E7DF">
+      <div style="display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:center;max-width:1500px;margin:0 auto">
+        <div style="position:relative;aspect-ratio:4 / 5;background:transparent">
+          <image-slot id="bb-about-photo" src="./assets/about-brandon.png" style="width:100%;height:100%" shape="rect" placeholder="Drop an about photo (Brandon coaching or with family)"></image-slot>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:26px">
+          <div data-anim="up" style="font-size:12px;font-weight:800;letter-spacing:.36em;text-transform:uppercase;color:#5C6B36">About Brandon</div>
+          <h2 data-anim="up" data-delay="60" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,4.6vw,80px);line-height:.94;text-transform:uppercase">First Sergeant.<br />Coach. Father.</h2>
+          <p data-anim="up" data-delay="140" style="margin:0;max-width:56ch;font-size:19px;line-height:1.65;color:rgba(25,26,22,.75)">I spent [XX] years in the Army, most of them as a First Sergeant — responsible for the discipline, readiness, and lives of the soldiers under me. I bring that same standard to the field and to my own house. I don't ask anyone to do something I haven't already done.</p>
+          <div data-anim="up" data-delay="200" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(25,26,22,.15);margin-top:10px">
+            <div style="background:#E9E7DF;padding:22px 18px"><div style="font-family:'Anton',sans-serif;font-size:40px;line-height:1">[XX]</div><div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(25,26,22,.6);margin-top:6px">Years Leading</div></div>
+            <div style="background:#E9E7DF;padding:22px 18px"><div style="font-family:'Anton',sans-serif;font-size:40px;line-height:1">[XX]</div><div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(25,26,22,.6);margin-top:6px">Athletes Coached</div></div>
+            <div style="background:#E9E7DF;padding:22px 18px"><div style="font-family:'Anton',sans-serif;font-size:40px;line-height:1">01</div><div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(25,26,22,.6);margin-top:6px">Mission</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr">
+      <div onClick="{{ goBook }}" style-hover="filter:brightness(1.08)" style="transition:filter .35s;cursor:pointer;position:relative;background:#4A5535;color:#E9E7DF;padding:110px 4vw;display:grid;grid-template-columns:.8fr 1.2fr;gap:36px;align-items:center">
+        <div style="position:relative;aspect-ratio:2 / 3;background:rgba(25,26,22,.2)">
+          <image-slot id="bb-book-cover" src="./assets/built-to-become-cover.png" style="width:100%;height:100%" shape="rect" placeholder="Drop the Built to Become cover"></image-slot>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:#E4D48A">His Story, In Print</div>
+          <h3 data-anim="up" data-delay="60" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(30px,3.2vw,52px);line-height:.96;text-transform:uppercase">Built to Become</h3>
+          <p data-anim="up" data-delay="120" style="margin:0;font-size:18px;line-height:1.6;color:rgba(233,231,223,.82)">The blueprint for what comes next when the role that defined you changes.</p>
+        </div>
+        <div onClick="{{ goBook }}" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32)" style="position:absolute;left:4vw;bottom:40px;z-index:3;transition:background .35s,color .35s,border-color .35s,box-shadow .35s;cursor:pointer;padding:16px 28px;background:transparent;border:1px solid rgba(233,231,223,.55);color:#E9E7DF;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Learn More</div>
+      </div>
+      <div onClick="{{ goCoaching }}" style-hover="filter:brightness(1.08)" style="transition:filter .35s;cursor:pointer;position:relative;overflow:hidden;color:#E9E7DF;padding:110px 4vw;display:flex;align-items:center;min-height:560px">
+        <video src="./reels/home-coaching-teaser.mp4" data-loop="always" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0"></video>
+        <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:20px;max-width:460px">
+          <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:#C9A63A">Train With Coach Brandon</div>
+          <h3 data-anim="up" data-delay="60" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(30px,3.2vw,52px);line-height:.96;text-transform:uppercase">Athlete Development</h3>
+          <p data-anim="up" data-delay="120" style="margin:0;font-size:18px;line-height:1.6;color:rgba(233,231,223,.78)">Speed, strength, and mindset training that builds the athlete and the person.</p>
+        </div>
+        <div onClick="{{ goCoaching }}" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32)" style="position:absolute;left:4vw;bottom:40px;z-index:3;transition:background .35s,color .35s,border-color .35s,box-shadow .35s;cursor:pointer;padding:16px 28px;background:transparent;border:1px solid rgba(233,231,223,.55);color:#E9E7DF;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Learn More</div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:50px">
+          <div>
+            <h2 data-anim="up" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,4.6vw,80px);line-height:.94;text-transform:uppercase">What's Next</h2>
+            <p data-anim="up" data-delay="70" style="margin:16px 0 0;max-width:60ch;font-size:19px;line-height:1.6;color:rgba(25,26,22,.7)">Coaching clinics, speaking engagements, and new episodes. See where Brandon is showing up next.</p>
+          </div>
+          <div data-anim="up" data-delay="120" style="display:inline-flex;align-items:center;gap:12px;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#4A5535;cursor:pointer">View All News &amp; Events <span style="width:34px;height:1px;background:#4A5535;display:inline-block"></span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(25,26,22,.16);border-top:2px solid #191A16">
+          <div data-anim="up" data-delay="80" style="background:#E9E7DF;padding:30px 26px 34px;display:flex;flex-direction:column;gap:16px;min-height:320px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+              <span style="padding:6px 12px;background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;white-space:nowrap;box-shadow:0 12px 34px rgba(110,127,58,.32);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Coaching Camp</span>
+              <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(25,26,22,.55)">[Date]</span>
+            </div>
+            <div style="font-family:'Anton',sans-serif;font-size:26px;line-height:1.05;text-transform:uppercase">Fall Performance Camp</div>
+            <p style="margin:0;font-size:17px;line-height:1.55;color:rgba(25,26,22,.7)">Registration is open for ages [X to X].</p>
+            <div style="margin-top:auto;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#4A5535;cursor:pointer">Register →</div>
+          </div>
+          <div data-anim="up" data-delay="150" style="background:#E9E7DF;padding:30px 26px 34px;display:flex;flex-direction:column;gap:16px;min-height:320px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+              <span style="padding:6px 12px;background:#191A16;color:#E9E7DF;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Podcast</span>
+              <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(25,26,22,.55)">[Date]</span>
+            </div>
+            <div style="font-family:'Anton',sans-serif;font-size:26px;line-height:1.05;text-transform:uppercase">New Episode: [Guest Name]</div>
+            <p style="margin:0;font-size:17px;line-height:1.55;color:rgba(25,26,22,.7)">Brandon sits down with [Guest] to talk [topic].</p>
+            <div style="margin-top:auto;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#4A5535;cursor:pointer">Listen Now →</div>
+          </div>
+          <div data-anim="up" data-delay="220" style="background:#E9E7DF;padding:30px 26px 34px;display:flex;flex-direction:column;gap:16px;min-height:320px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+              <span style="padding:6px 12px;border:1px solid #191A16;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Speaking</span>
+              <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(25,26,22,.55)">[Date]</span>
+            </div>
+            <div style="font-family:'Anton',sans-serif;font-size:26px;line-height:1.05;text-transform:uppercase">Brandon Speaks at [Event]</div>
+            <p style="margin:0;font-size:17px;line-height:1.55;color:rgba(25,26,22,.7)">A talk on [topic] for [organization].</p>
+            <div style="margin-top:auto;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#4A5535;cursor:pointer">Learn More →</div>
+          </div>
+          <div data-anim="up" data-delay="290" style="background:#E9E7DF;padding:30px 26px 34px;display:flex;flex-direction:column;gap:16px;min-height:320px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+              <span style="padding:6px 12px;background:#8E9977;color:#191A16;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">News</span>
+              <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(25,26,22,.55)">Coming Soon</span>
+            </div>
+            <div style="font-family:'Anton',sans-serif;font-size:26px;line-height:1.05;text-transform:uppercase">Built to Become Hits [Milestone]</div>
+            <p style="margin:0;font-size:17px;line-height:1.55;color:rgba(25,26,22,.7)">[e.g. Amazon Bestseller in category.]</p>
+            <div style="margin-top:auto;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#4A5535;cursor:pointer">Read More →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#191A16;color:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto">
+        <h2 data-anim="up" style="margin:0 0 56px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(34px,4vw,68px);line-height:.95;text-transform:uppercase">In Their Words</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:46px">
+          <div data-anim="up" data-delay="80" style="display:flex;flex-direction:column;gap:20px;border-top:1px solid rgba(233,231,223,.25);padding-top:26px">
+            <p style="margin:0;font-family:'Instrument Serif',serif;font-size:26px;line-height:1.3">"[Short quote from a client, mentee, or reader.]"</p>
+            <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8E9977">[Name, Role]</div>
+          </div>
+          <div data-anim="up" data-delay="160" style="display:flex;flex-direction:column;gap:20px;border-top:1px solid rgba(233,231,223,.25);padding-top:26px">
+            <p style="margin:0;font-family:'Instrument Serif',serif;font-size:26px;line-height:1.3">"[Short quote from a client, mentee, or reader.]"</p>
+            <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8E9977">[Name, Role]</div>
+          </div>
+          <div data-anim="up" data-delay="240" style="display:flex;flex-direction:column;gap:20px;border-top:1px solid rgba(233,231,223,.25);padding-top:26px">
+            <p style="margin:0;font-family:'Instrument Serif',serif;font-size:26px;line-height:1.3">"[Short quote from a client, mentee, or reader.]"</p>
+            <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8E9977">[Name, Role]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:130px 5vw;background:linear-gradient(118deg,#333D22 0%,#556331 44%,#9A8B3C 78%,#C9A63A 100%);color:#E9E7DF;text-align:center">
+      <h2 style="margin:0 auto;max-width:22ch;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(40px,6vw,110px);line-height:.9;text-transform:uppercase">
+        <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="0" style="display:inline-block;line-height:1.12">Enough talking.</span></span>
+        <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="90" style="display:inline-block;line-height:1.12">Time to build</span></span>
+        <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="180" style="display:inline-block;line-height:1.12">who you were made to be.</span></span>
+      </h2>
+      <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" data-anim="up" data-delay="260" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 14px 40px rgba(0,0,0,.4);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;margin-top:44px;cursor:pointer;padding:22px 40px;background:transparent;color:#E9E7DF;border:1px solid rgba(201,166,58,.6);font-size:14px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Work With Brandon</a>
+    </div>
+
+    <div style="padding:90px 5vw 50px;background:#191A16;color:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto;display:grid;grid-template-columns:1.3fr .7fr .7fr 1.2fr;gap:44px">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-family:'Anton',sans-serif;font-size:26px;text-transform:uppercase;line-height:1">Brandon Butler</div>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(233,231,223,.65)">Retired First Sergeant. Coach. Author. No shortcuts.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;color:rgba(233,231,223,.7)">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977;margin-bottom:6px">Pages</div>
+          <div onClick="{{ goHome }}" style="cursor:pointer">Home</div>
+          <div onClick="{{ goBook }}" style="cursor:pointer">The Book</div>
+          <div onClick="{{ goCoaching }}" style="cursor:pointer">Athlete Coaching</div>
+          <div onClick="{{ goPodcast }}" style="cursor:pointer">Podcast</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;color:rgba(233,231,223,.7)">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977;margin-bottom:6px">Connect</div>
+          <div>[Email]</div>
+          <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="color:#E8D998" style="color:inherit">Instagram</a>
+          <a href="https://www.facebook.com/b3astacademy" target="_blank" rel="noopener" style-hover="color:#E8D998" style="color:inherit">Facebook</a>
+          <a href="https://www.tiktok.com/@b3connect_" target="_blank" rel="noopener" style-hover="color:#E8D998" style="color:inherit">TikTok</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977">Join the Mission</div>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(233,231,223,.65)">Newsletter: purpose, training, and what's next.</p>
+          <div style="display:flex;border:1px solid rgba(233,231,223,.3)">
+            <div style="flex:1;padding:16px 18px;font-size:15px;color:rgba(233,231,223,.45)">Your email</div>
+            <div style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent" style="transition:background .35s,color .35s,border-color .35s;cursor:pointer;padding:16px 22px;background:transparent;border-left:1px solid rgba(233,231,223,.3);color:#E9E7DF;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Sign Up</div>
+          </div>
+        </div>
+      </div>
+      <div style="max-width:1500px;margin:60px auto 0;padding-top:24px;border-top:1px solid rgba(233,231,223,.18);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:rgba(233,231,223,.5)">
+        <div>© [Year] Brandon Butler. All rights reserved.</div>
+        <div>Believe. Build. Become.</div>
+      </div>
+    </div>
+
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isBook }}" hint-placeholder-val="{{ true }}">
+  <div>
+
+    <div style="background:radial-gradient(110% 95% at 4% 4%,#2C3321 0%,#191A16 52%,#101109 100%);color:#E9E7DF;min-height:86vh;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:center;gap:40px;padding:110px 5vw">
+      <div style="display:flex;flex-direction:column;gap:32px">
+        <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:#C9A63A">The Book</div>
+        <h1 style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(54px,9vw,164px);line-height:.86;text-transform:uppercase;letter-spacing:-.03em">
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="0" style="display:inline-block;line-height:1.12">Who Am I</span></span>
+          <br />
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="110" style="display:inline-block;line-height:1.12;background-image:linear-gradient(96deg,#C9A63A 0%,#EBDC9A 55%,#C9A63A 100%);background-clip:text;color:transparent">... Now?</span></span>
+        </h1>
+        <p data-anim="up" data-delay="200" style="margin:0;max-width:54ch;font-size:22px;line-height:1.48;letter-spacing:-.005em;color:rgba(233,231,223,.78)">Every man hits a point where the role that defined him disappears — the uniform comes off, the title goes away, the team moves on. BUILT TO BECOME is what you do next.</p>
+        <div data-anim="up" data-delay="280" style="display:flex;gap:14px;flex-wrap:wrap">
+          <a href="https://www.amazon.com/BUILT-BECOME-BRANDON-BUTLER-ebook/dp/B0H5Z3RHH2" target="_blank" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;padding:20px 34px;background:transparent;border:1px solid rgba(233,231,223,.45);color:#E9E7DF;white-space:nowrap;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Get Your Copy on Amazon</a>
+          <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;padding:20px 34px;background:transparent;border:1px solid rgba(201,166,58,.65);color:#E8D998;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap">DM for a Signed Copy</a>
+        </div>
+      </div>
+      <div style="position:relative;min-width:0;overflow:hidden;aspect-ratio:2 / 3;background:rgba(233,231,223,.07)">
+        <image-slot id="bb-book-hero" src="./assets/built-to-become-cover.png" style="width:100%;height:100%" shape="rect" placeholder="Drop the book cover"></image-slot>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#E9E7DF">
+      <div style="max-width:1300px;margin:0 auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:60px">
+        <h2 data-anim="up" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,4.6vw,82px);line-height:.92;text-transform:uppercase">The Moment Every Man Faces</h2>
+        <div style="display:flex;flex-direction:column;gap:28px">
+          <div data-anim="up" data-delay="80" style="display:flex;flex-wrap:wrap;gap:10px">
+            <span style="padding:10px 16px;border:1px solid rgba(25,26,22,.3);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Job loss</span>
+            <span style="padding:10px 16px;border:1px solid rgba(25,26,22,.3);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Retirement</span>
+            <span style="padding:10px 16px;border:1px solid rgba(25,26,22,.3);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Divorce</span>
+            <span style="padding:10px 16px;border:1px solid rgba(25,26,22,.3);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Empty nest</span>
+            <span style="padding:10px 16px;border:1px solid rgba(25,26,22,.3);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Military separation</span>
+            <span style="padding:10px 16px;border:1px solid rgba(25,26,22,.3);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">Injury</span>
+          </div>
+          <p data-anim="up" data-delay="140" style="margin:0;max-width:62ch;font-size:19px;line-height:1.65;color:rgba(25,26,22,.75)">When the title goes, so does the routine that told you who you were. That gap is where men get stuck — numbing out, coasting, or chasing the next thing without asking why. This book is about closing that gap on purpose instead of by accident.</p>
+          <p data-anim="up" data-delay="200" style="margin:0;font-family:'Instrument Serif',serif;font-size:clamp(24px,2.4vw,38px);line-height:1.25">"This isn't a book about feelings. It's a book about what to do next."</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#4A5535;color:#E9E7DF">
+      <div style="max-width:1400px;margin:0 auto">
+        <h2 data-anim="up" style="margin:0 0 50px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(36px,4.4vw,76px);line-height:.95;text-transform:uppercase">Who This Book Is For</h2>
+        <div style="display:flex;flex-direction:column;border-top:1px solid rgba(233,231,223,.3)">
+          <div data-anim="up" data-delay="60" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.3);font-size:clamp(20px,2.1vw,32px);line-height:1.3">The man navigating a career or role transition</div>
+          <div data-anim="up" data-delay="120" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.3);font-size:clamp(20px,2.1vw,32px);line-height:1.3">The veteran or leader re-entering civilian life</div>
+          <div data-anim="up" data-delay="180" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.3);font-size:clamp(20px,2.1vw,32px);line-height:1.3">The father redefining his role at home</div>
+          <div data-anim="up" data-delay="240" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.3);font-size:clamp(20px,2.1vw,32px);line-height:1.3">The athlete or coach facing "what's next"</div>
+          <div data-anim="up" data-delay="300" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.3);font-size:clamp(20px,2.1vw,32px);line-height:1.3">Anyone searching for their next level</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:130px 5vw;background:#191A16;color:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto">
+        <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:#C9A63A">Inside the Book</div>
+        <h2 style="margin:16px 0 60px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,5.6vw,104px);line-height:.9;text-transform:uppercase">
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="0" style="display:inline-block;line-height:1.12">Believe</span></span>
+          <span style="color:#8E9977">→</span>
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="90" style="display:inline-block;line-height:1.12">Build</span></span>
+          <span style="color:#8E9977">→</span>
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="180" style="display:inline-block;line-height:1.12">Become</span></span>
+        </h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(233,231,223,.22)">
+          <div data-anim="up" data-delay="80" style="background:#191A16;padding:40px 34px 48px;display:flex;flex-direction:column;gap:16px">
+            <div style="font-family:'Anton',sans-serif;font-size:30px;text-transform:uppercase">Believe</div>
+            <p style="margin:0;font-size:18px;line-height:1.6;color:rgba(233,231,223,.78)">Rebuilding identity and belief in purpose.</p>
+          </div>
+          <div data-anim="up" data-delay="160" style="background:#191A16;padding:40px 34px 48px;display:flex;flex-direction:column;gap:16px">
+            <div style="font-family:'Anton',sans-serif;font-size:30px;text-transform:uppercase">Build</div>
+            <p style="margin:0;font-size:18px;line-height:1.6;color:rgba(233,231,223,.78)">The daily discipline and structure that create change.</p>
+          </div>
+          <div data-anim="up" data-delay="240" style="background:#191A16;padding:40px 34px 48px;display:flex;flex-direction:column;gap:16px">
+            <div style="font-family:'Anton',sans-serif;font-size:30px;text-transform:uppercase">Become</div>
+            <p style="margin:0;font-size:18px;line-height:1.6;color:rgba(233,231,223,.78)">Stepping into the next version of yourself.</p>
+          </div>
+        </div>
+        <p data-anim="up" data-delay="300" style="margin:28px 0 0;font-size:16px;color:rgba(233,231,223,.5)">[Chapter breakdown coming]</p>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#4A5535;color:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto">
+        <h2 data-anim="up" style="margin:0 0 50px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(34px,4vw,70px);line-height:.95;text-transform:uppercase">What Readers Are Saying</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(233,231,223,.28)">
+          <div data-anim="up" data-delay="80" style="background:#4A5535;padding:36px 30px;display:flex;flex-direction:column;gap:18px">
+            <div style="font-size:13px;letter-spacing:.2em;color:#E9E7DF">★★★★★</div>
+            <p style="margin:0;font-size:19px;line-height:1.55">"[Reader review or top Amazon quote.]"</p>
+            <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(233,231,223,.7)">[Reader name]</div>
+          </div>
+          <div data-anim="up" data-delay="160" style="background:#4A5535;padding:36px 30px;display:flex;flex-direction:column;gap:18px">
+            <div style="font-size:13px;letter-spacing:.2em;color:#E9E7DF">★★★★★</div>
+            <p style="margin:0;font-size:19px;line-height:1.55">"[Reader review or top Amazon quote.]"</p>
+            <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(233,231,223,.7)">[Reader name]</div>
+          </div>
+          <div data-anim="up" data-delay="240" style="background:#4A5535;padding:36px 30px;display:flex;flex-direction:column;gap:18px">
+            <div style="font-size:13px;letter-spacing:.2em;color:#E9E7DF">★★★★★</div>
+            <p style="margin:0;font-size:19px;line-height:1.55">"[Reader review or top Amazon quote.]"</p>
+            <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(233,231,223,.7)">[Reader name]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#E9E7DF">
+      <div style="max-width:1200px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:30px;align-items:center">
+        <h2 data-anim="up" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,5vw,92px);line-height:.92;text-transform:uppercase">Your Next Chapter Starts Today</h2>
+        <a href="https://www.amazon.com/BUILT-BECOME-BRANDON-BUTLER-ebook/dp/B0H5Z3RHH2" target="_blank" data-anim="up" data-delay="90" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 14px 40px rgba(0,0,0,.4);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;padding:22px 40px;background:transparent;color:#191A16;border:1px solid rgba(25,26,22,.45);font-size:14px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Get Your Copy on Amazon</a>
+        <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" data-anim="up" data-delay="150" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;padding:20px 34px;background:transparent;border:1px solid rgba(25,26,22,.45);color:#191A16;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">DM for a Signed Copy</a>
+        <p data-anim="up" data-delay="190" style="margin:0;max-width:52ch;font-size:17px;line-height:1.6;color:rgba(25,26,22,.7)">Grab it on Amazon, or send Brandon a direct message on Instagram to order a signed copy.</p>
+        <div data-anim="up" data-delay="230" style="display:flex;gap:26px;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(25,26,22,.6)"><span>Kindle</span><span>·</span><span>Paperback [if available]</span></div>
+      </div>
+    </div>
+
+    <div style="padding:110px 5vw;background:#191A16;color:#E9E7DF">
+      <div style="max-width:1300px;margin:0 auto;display:grid;grid-template-columns:.7fr 1.3fr;gap:56px">
+        <h2 data-anim="up" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(34px,4vw,68px);line-height:.95;text-transform:uppercase">FAQ</h2>
+        <div style="display:flex;flex-direction:column;border-top:1px solid rgba(233,231,223,.22)">
+          <div data-anim="up" data-delay="70" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.22);display:flex;justify-content:space-between;gap:20px;font-size:21px">What if I'm not going through a "crisis"?<span style="color:#8E9977">+</span></div>
+          <div data-anim="up" data-delay="130" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.22);display:flex;justify-content:space-between;gap:20px;font-size:21px">Is this only for men?<span style="color:#8E9977">+</span></div>
+          <div data-anim="up" data-delay="190" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.22);display:flex;justify-content:space-between;gap:20px;font-size:21px">Format and length?<span style="color:#8E9977">+</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:130px 5vw;background:linear-gradient(118deg,#333D22 0%,#556331 44%,#9A8B3C 78%,#C9A63A 100%);color:#E9E7DF;text-align:center">
+      <h2 style="margin:0 auto;max-width:20ch;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(40px,6vw,112px);line-height:.9;text-transform:uppercase">
+        <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="0" style="display:inline-block;line-height:1.12">You weren't built</span></span>
+        <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="90" style="display:inline-block;line-height:1.12">to stay stuck.</span></span>
+        <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="180" style="display:inline-block;line-height:1.12;background-image:linear-gradient(96deg,#12130F 0%,#3A4527 100%);background-clip:text;color:transparent">You were Built to Become.</span></span>
+      </h2>
+      <a href="https://www.amazon.com/BUILT-BECOME-BRANDON-BUTLER-ebook/dp/B0H5Z3RHH2" target="_blank" data-anim="up" data-delay="260" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 14px 40px rgba(0,0,0,.4);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;margin-top:44px;margin-right:14px;padding:22px 40px;background:transparent;color:#E9E7DF;border:1px solid rgba(201,166,58,.6);font-size:14px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Buy Now on Amazon</a>
+      <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" data-anim="up" data-delay="320" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 14px 40px rgba(0,0,0,.4);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;margin-top:44px;padding:22px 40px;border:1px solid rgba(233,231,223,.75);background:transparent;color:#E9E7DF;font-size:14px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap">DM for a Signed Copy</a>
+    </div>
+
+    <div style="padding:90px 5vw 50px;background:#191A16;color:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto;display:grid;grid-template-columns:1.3fr .7fr .7fr 1.2fr;gap:44px">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-family:'Anton',sans-serif;font-size:26px;text-transform:uppercase;line-height:1">Brandon Butler</div>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(233,231,223,.65)">Retired First Sergeant. Coach. Author. No shortcuts.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;color:rgba(233,231,223,.7)">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977;margin-bottom:6px">Pages</div>
+          <div onClick="{{ goHome }}" style="cursor:pointer">Home</div>
+          <div onClick="{{ goBook }}" style="cursor:pointer">The Book</div>
+          <div onClick="{{ goCoaching }}" style="cursor:pointer">Athlete Coaching</div>
+          <div onClick="{{ goPodcast }}" style="cursor:pointer">Podcast</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;color:rgba(233,231,223,.7)">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977;margin-bottom:6px">Connect</div>
+          <div>[Email]</div>
+          <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="color:#E8D998" style="color:inherit">Instagram</a>
+          <a href="https://www.facebook.com/b3astacademy" target="_blank" rel="noopener" style-hover="color:#E8D998" style="color:inherit">Facebook</a>
+          <a href="https://www.tiktok.com/@b3connect_" target="_blank" rel="noopener" style-hover="color:#E8D998" style="color:inherit">TikTok</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977">Join the Mission</div>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(233,231,223,.65)">Newsletter: purpose, training, and what's next.</p>
+          <div style="display:flex;border:1px solid rgba(233,231,223,.3)">
+            <div style="flex:1;padding:16px 18px;font-size:15px;color:rgba(233,231,223,.45)">Your email</div>
+            <div style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent" style="transition:background .35s,color .35s,border-color .35s;cursor:pointer;padding:16px 22px;background:transparent;border-left:1px solid rgba(233,231,223,.3);color:#E9E7DF;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Sign Up</div>
+          </div>
+        </div>
+      </div>
+      <div style="max-width:1500px;margin:60px auto 0;padding-top:24px;border-top:1px solid rgba(233,231,223,.18);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:rgba(233,231,223,.5)">
+        <div>© [Year] Brandon Butler. All rights reserved.</div>
+        <div>Believe. Build. Become.</div>
+      </div>
+    </div>
+
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isCoaching }}" hint-placeholder-val="{{ true }}">
+  <div>
+
+    <div style="position:relative;background:radial-gradient(115% 95% at 6% 0%,#2C3321 0%,#191A16 52%,#101109 100%);color:#E9E7DF;min-height:86vh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:stretch">
+      <div style="min-width:0;padding:110px 5vw;display:flex;flex-direction:column;justify-content:center;gap:32px">
+        <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:#C9A63A">Athlete Coaching · Performance Training</div>
+        <h1 style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(44px,6.6vw,118px);line-height:.88;text-transform:uppercase;letter-spacing:-.02em">
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="0" style="display:inline-block;line-height:1.12">Building Athletes.</span></span>
+          <br />
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="100" style="display:inline-block;line-height:1.12">Building Leaders.</span></span>
+          <br />
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="200" style="display:inline-block;line-height:1.12;background-image:linear-gradient(96deg,#C9A63A 0%,#EBDC9A 55%,#C9A63A 100%);background-clip:text;color:transparent">Building Character.</span></span>
+        </h1>
+        <p data-anim="up" data-delay="280" style="margin:0;max-width:52ch;font-size:22px;line-height:1.48;letter-spacing:-.005em;color:rgba(233,231,223,.78)">Coach Brandon Butler trains [ages / sport] athletes to get faster, get stronger, and stop making excuses — on the field and off it.</p>
+        <div data-anim="up" data-delay="350" style="display:flex;gap:14px;flex-wrap:wrap">
+          <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;cursor:pointer;padding:20px 34px;background:transparent;border:1px solid rgba(233,231,223,.45);color:#E9E7DF;white-space:nowrap;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Enroll Your Athlete Today</a>
+          <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;cursor:pointer;padding:20px 34px;background:transparent;border:1px solid rgba(233,231,223,.45);color:#E9E7DF;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Book a Consultation</a>
+        </div>
+      </div>
+      <div style="position:relative;min-width:0;overflow:hidden;border-left:1px solid rgba(233,231,223,.16);min-height:60vh">
+        <video src="./reels/hero-main.mp4" data-loop="always" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" style="width:100%;height:100%;object-fit:cover;display:block"></video>
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,17,9,.55) 0%,rgba(16,17,9,0) 45%);pointer-events:none"></div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#E9E7DF">
+      <div style="max-width:1300px;margin:0 auto;display:grid;grid-template-columns:.85fr 1.15fr;gap:60px">
+        <h2 data-anim="up" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,4.6vw,84px);line-height:.92;text-transform:uppercase">Most Programs Build the Body. That's It.</h2>
+        <div style="display:flex;flex-direction:column;gap:24px">
+          <p data-anim="up" data-delay="80" style="margin:0;max-width:62ch;font-size:20px;line-height:1.6;color:rgba(25,26,22,.78)">Plenty of programs will make an athlete faster. Few build the mind and the character alongside it. Parents want more than a trophy. They want their kid to become someone.</p>
+          <p data-anim="up" data-delay="140" style="margin:0;max-width:62ch;font-size:19px;line-height:1.65;color:rgba(25,26,22,.65)">Most programs run kids through drills and call it development. I run them through drills, hold them accountable, and teach them how to carry themselves when no one's watching. That's the gap parents keep telling me is missing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:130px 5vw;background:#4A5535;color:#E9E7DF">
+      <div style="max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
+        <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:#E4D48A">Coach Brandon's Philosophy</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(233,231,223,.3)">
+          <div data-anim="up" data-delay="70" style="background:#4A5535;padding:48px 34px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(24px,2.6vw,42px);line-height:1.05;text-transform:uppercase">Does this build the athlete?</div>
+          <div data-anim="up" data-delay="150" style="background:#4A5535;padding:48px 34px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(24px,2.6vw,42px);line-height:1.05;text-transform:uppercase">Does this build the person?</div>
+          <div data-anim="up" data-delay="230" style="background:#4A5535;padding:48px 34px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(24px,2.6vw,42px);line-height:1.05;text-transform:uppercase;color:#191A16">Does this build the future leader?</div>
+        </div>
+        <p data-anim="up" data-delay="300" style="margin:0;max-width:70ch;font-family:'Instrument Serif',serif;font-size:clamp(24px,2.3vw,36px);line-height:1.28">"I spent my career finding out what people are made of under pressure. I use the same standard here — with kids, not soldiers."</p>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#191A16;color:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto">
+        <h2 data-anim="up" style="margin:0 0 54px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,4.6vw,82px);line-height:.94;text-transform:uppercase">What Training Looks Like</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;background:rgba(233,231,223,.2)">
+          <div data-anim="up" data-delay="60" style="background:#191A16;padding:38px 30px;display:flex;flex-direction:column;gap:14px"><div style="font-family:'Anton',sans-serif;font-size:52px;line-height:1;color:rgba(233,231,223,.28)">01</div><div style="font-size:23px;font-weight:600">Speed &amp; Agility</div></div>
+          <div data-anim="up" data-delay="120" style="background:#191A16;padding:38px 30px;display:flex;flex-direction:column;gap:14px"><div style="font-family:'Anton',sans-serif;font-size:52px;line-height:1;color:rgba(233,231,223,.28)">02</div><div style="font-size:23px;font-weight:600">Strength &amp; Power Development</div></div>
+          <div data-anim="up" data-delay="180" style="background:#191A16;padding:38px 30px;display:flex;flex-direction:column;gap:14px"><div style="font-family:'Anton',sans-serif;font-size:52px;line-height:1;color:rgba(233,231,223,.28)">03</div><div style="font-size:23px;font-weight:600">Conditioning &amp; Endurance</div></div>
+          <div data-anim="up" data-delay="240" style="background:#191A16;padding:38px 30px;display:flex;flex-direction:column;gap:14px"><div style="font-family:'Anton',sans-serif;font-size:52px;line-height:1;color:rgba(233,231,223,.28)">04</div><div style="font-size:23px;font-weight:600">Mindset &amp; Confidence Training</div></div>
+          <div data-anim="up" data-delay="300" style="background:#191A16;padding:38px 30px;display:flex;flex-direction:column;gap:14px"><div style="font-family:'Anton',sans-serif;font-size:52px;line-height:1;color:#8E9977">05</div><div style="font-size:23px;font-weight:600">Leadership &amp; Character Development</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:radial-gradient(120% 100% at 100% 0%,#2C3321 0%,#191A16 55%,#101109 100%);color:#E9E7DF">
+      <div style="max-width:1600px;margin:0 auto">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:34px;flex-wrap:wrap;margin-bottom:50px">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:#C9A63A">Inside the Work</div>
+            <h2 style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,4.8vw,88px);line-height:.92;text-transform:uppercase">
+              <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="0" style="display:inline-block;line-height:1.12">Work Ethic.</span></span>
+              <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="90" style="display:inline-block;line-height:1.12">Discipline.</span></span>
+              <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="180" style="display:inline-block;line-height:1.12;background-image:linear-gradient(96deg,#C9A63A 0%,#EBDC9A 55%,#C9A63A 100%);background-clip:text;color:transparent">Proof.</span></span>
+            </h2>
+          </div>
+          <p data-anim="up" data-delay="240" style="margin:0;max-width:38ch;font-size:19px;line-height:1.6;color:rgba(233,231,223,.75)">Real sessions, real athletes. This is what training with Coach Brandon looks like week to week.</p>
+        </div>
+        <div style="display:flex;gap:18px;overflow-x:auto;padding-bottom:22px;scroll-snap-type:x mandatory">
+          <div data-anim="up" data-delay="60" style="flex:0 0 clamp(240px,22vw,320px);scroll-snap-align:start;display:flex;flex-direction:column;gap:16px">
+            <div onClick="{{ onVideoTap }}" style="cursor:pointer;position:relative;aspect-ratio:9 / 16;overflow:hidden;background:#101109;border:1px solid rgba(201,166,58,.35)">
+              <video src="./reels/spring-break-working.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block"></video>
+              <div data-role="pp" style="position:absolute;right:12px;bottom:12px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(16,17,9,.62);border:1px solid rgba(201,166,58,.6);color:#E8D998;font-size:12px;letter-spacing:.08em;pointer-events:none">▶</div>
+            </div>
+            <div style="font-family:'Anton',sans-serif;letter-spacing:-.02em;font-size:22px;line-height:1.05;text-transform:uppercase">No Days Off</div>
+            <p style="margin:0;font-size:16px;line-height:1.5;color:rgba(233,231,223,.72)">Spring Break '26 and we WORKING. No days off when you're chasing greatness.</p>
+          </div>
+          <div data-anim="up" data-delay="120" style="flex:0 0 clamp(240px,22vw,320px);scroll-snap-align:start;display:flex;flex-direction:column;gap:16px">
+            <div onClick="{{ onVideoTap }}" style="cursor:pointer;position:relative;aspect-ratio:9 / 16;overflow:hidden;background:#101109;border:1px solid rgba(201,166,58,.35)">
+              <video src="./reels/control.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block"></video>
+              <div data-role="pp" style="position:absolute;right:12px;bottom:12px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(16,17,9,.62);border:1px solid rgba(201,166,58,.6);color:#E8D998;font-size:12px;letter-spacing:.08em;pointer-events:none">▶</div>
+            </div>
+            <div style="font-family:'Anton',sans-serif;letter-spacing:-.02em;font-size:22px;line-height:1.05;text-transform:uppercase">Control</div>
+            <p style="margin:0;font-size:16px;line-height:1.5;color:rgba(233,231,223,.72)">Upper body day isn't just about strength, it's about CONTROL. Resistance catches. Grip strength.</p>
+          </div>
+          <div data-anim="up" data-delay="180" style="flex:0 0 clamp(240px,22vw,320px);scroll-snap-align:start;display:flex;flex-direction:column;gap:16px">
+            <div onClick="{{ onVideoTap }}" style="cursor:pointer;position:relative;aspect-ratio:9 / 16;overflow:hidden;background:#101109;border:1px solid rgba(201,166,58,.35)">
+              <video src="./reels/setbacks-build-comebacks.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block"></video>
+              <div data-role="pp" style="position:absolute;right:12px;bottom:12px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(16,17,9,.62);border:1px solid rgba(201,166,58,.6);color:#E8D998;font-size:12px;letter-spacing:.08em;pointer-events:none">▶</div>
+            </div>
+            <div style="font-family:'Anton',sans-serif;letter-spacing:-.02em;font-size:22px;line-height:1.05;text-transform:uppercase">Setbacks Build Comebacks</div>
+            <p style="margin:0;font-size:16px;line-height:1.5;color:rgba(233,231,223,.72)">Setbacks build comebacks. We building.</p>
+          </div>
+          <div data-anim="up" data-delay="240" style="flex:0 0 clamp(240px,22vw,320px);scroll-snap-align:start;display:flex;flex-direction:column;gap:16px">
+            <div onClick="{{ onVideoTap }}" style="cursor:pointer;position:relative;aspect-ratio:9 / 16;overflow:hidden;background:#101109;border:1px solid rgba(201,166,58,.35)">
+              <video src="./reels/upper-body-building.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block"></video>
+              <div data-role="pp" style="position:absolute;right:12px;bottom:12px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(16,17,9,.62);border:1px solid rgba(201,166,58,.6);color:#E8D998;font-size:12px;letter-spacing:.08em;pointer-events:none">▶</div>
+            </div>
+            <div style="font-family:'Anton',sans-serif;letter-spacing:-.02em;font-size:22px;line-height:1.05;text-transform:uppercase">Building</div>
+            <p style="margin:0;font-size:16px;line-height:1.5;color:rgba(233,231,223,.72)">Upper body building. Wide receiver, class of 2028, deep in the off-season.</p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:34px">
+          <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(233,231,223,.5)">Scroll for more · Clips play muted</div>
+          <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="display:inline-block;cursor:pointer;transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;padding:18px 30px;background:transparent;border:1px solid rgba(233,231,223,.45);color:#E9E7DF;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Enroll Your Athlete</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#E9E7DF">
+      <div style="max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center">
+        <div style="display:flex;flex-direction:column;gap:26px">
+          <div data-anim="up" style="font-size:12px;font-weight:800;letter-spacing:.36em;text-transform:uppercase;color:#5C6B36">Why Parents Trust Coach Brandon</div>
+          <h2 data-anim="up" data-delay="60" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(36px,4.2vw,76px);line-height:.94;text-transform:uppercase">Led Soldiers. Now Leading Kids.</h2>
+          <p data-anim="up" data-delay="130" style="margin:0;max-width:58ch;font-size:19px;line-height:1.65;color:rgba(25,26,22,.75)">I spent [XX] years leading soldiers before I ever coached an athlete. I know what it takes to build people who perform under pressure — and I hold your kid to that same standard, on the field and off it.</p>
+          <div data-anim="up" data-delay="190" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(25,26,22,.15)">
+            <div style="background:#E9E7DF;padding:22px 18px"><div style="font-family:'Anton',sans-serif;font-size:38px;line-height:1">[XX]</div><div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(25,26,22,.6);margin-top:6px">Years Coaching</div></div>
+            <div style="background:#E9E7DF;padding:22px 18px"><div style="font-family:'Anton',sans-serif;font-size:38px;line-height:1">[XX]</div><div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(25,26,22,.6);margin-top:6px">Athletes Trained</div></div>
+            <div style="background:#E9E7DF;padding:22px 18px"><div style="font-family:'Anton',sans-serif;font-size:38px;line-height:1">[XX]</div><div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(25,26,22,.6);margin-top:6px">Years Leading Soldiers</div></div>
+          </div>
+        </div>
+        <div style="position:relative;aspect-ratio:4 / 5;background:rgba(25,26,22,.06)">
+          <image-slot id="bb-coach-portrait" src="./assets/coach-track.png" style="width:100%;height:100%" shape="rect" placeholder="Drop a coaching photo"></image-slot>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#4A5535;color:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto">
+        <h2 data-anim="up" style="margin:0 0 50px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(34px,4vw,70px);line-height:.95;text-transform:uppercase">Parents &amp; Athletes</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:46px">
+          <div data-anim="up" data-delay="70" style="border-top:1px solid rgba(233,231,223,.35);padding-top:26px;display:flex;flex-direction:column;gap:18px"><p style="margin:0;font-family:'Instrument Serif',serif;font-size:26px;line-height:1.3">"[Parent quote.]"</p><div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(233,231,223,.7)">[Parent name]</div></div>
+          <div data-anim="up" data-delay="150" style="border-top:1px solid rgba(233,231,223,.35);padding-top:26px;display:flex;flex-direction:column;gap:18px"><p style="margin:0;font-family:'Instrument Serif',serif;font-size:26px;line-height:1.3">"[Athlete quote.]"</p><div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(233,231,223,.7)">[Athlete name, sport]</div></div>
+          <div data-anim="up" data-delay="230" style="border-top:1px solid rgba(233,231,223,.35);padding-top:26px;display:flex;flex-direction:column;gap:18px"><p style="margin:0;font-family:'Instrument Serif',serif;font-size:26px;line-height:1.3">"[Parent or coach quote.]"</p><div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(233,231,223,.7)">[Name, role]</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto">
+        <h2 data-anim="up" style="margin:0 0 50px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,4.6vw,82px);line-height:.94;text-transform:uppercase">Program Options</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#191A16;border:2px solid #191A16">
+          <div data-anim="up" data-delay="70" style="background:#E9E7DF;padding:40px 32px 46px;display:flex;flex-direction:column;gap:18px;min-height:400px">
+            <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#4A5535">Tier 01</div>
+            <div style="font-family:'Anton',sans-serif;font-size:34px;line-height:1;text-transform:uppercase">1-on-1 Training</div>
+            <div style="font-family:'Anton',sans-serif;font-size:30px;line-height:1">[$XXX]</div>
+            <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(25,26,22,.7)">[Session length, frequency, what is included.]</p>
+            <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32)" style="transition:background .35s,color .35s,border-color .35s,box-shadow .35s,transform .35s cubic-bezier(.16,1,.3,1);display:block;margin-top:auto;cursor:pointer;padding:16px 24px;background:transparent;border:1px solid rgba(74,85,53,.5);color:#4A5535;text-align:center;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Enroll Now</a>
+          </div>
+          <div data-anim="up" data-delay="150" style="background:#191A16;color:#E9E7DF;padding:40px 32px 46px;display:flex;flex-direction:column;gap:18px;min-height:400px">
+            <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977">Tier 02 · Most Popular</div>
+            <div style="font-family:'Anton',sans-serif;font-size:34px;line-height:1;text-transform:uppercase">Group Camp</div>
+            <div style="font-family:'Anton',sans-serif;font-size:30px;line-height:1">[$XXX]</div>
+            <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(233,231,223,.75)">[Group size, schedule, age range, location.]</p>
+            <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32)" style="transition:background .35s,color .35s,border-color .35s,box-shadow .35s,transform .35s cubic-bezier(.16,1,.3,1);display:block;margin-top:auto;cursor:pointer;padding:16px 24px;background:transparent;border:1px solid rgba(233,231,223,.45);color:#E9E7DF;text-align:center;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Register</a>
+          </div>
+          <div data-anim="up" data-delay="230" style="background:#E9E7DF;padding:40px 32px 46px;display:flex;flex-direction:column;gap:18px;min-height:400px">
+            <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#4A5535">Tier 03</div>
+            <div style="font-family:'Anton',sans-serif;font-size:34px;line-height:1;text-transform:uppercase">Season-Long Training</div>
+            <div style="font-family:'Anton',sans-serif;font-size:30px;line-height:1">[$XXX]</div>
+            <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(25,26,22,.7)">[Duration, sessions per week, progress tracking.]</p>
+            <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32)" style="transition:background .35s,color .35s,border-color .35s,box-shadow .35s,transform .35s cubic-bezier(.16,1,.3,1);display:block;margin-top:auto;cursor:pointer;padding:16px 24px;background:transparent;border:1px solid rgba(74,85,53,.5);color:#4A5535;text-align:center;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Book a Consultation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:110px 5vw;background:#191A16;color:#E9E7DF">
+      <div style="max-width:1300px;margin:0 auto;display:grid;grid-template-columns:.7fr 1.3fr;gap:56px">
+        <h2 data-anim="up" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(34px,4vw,68px);line-height:.95;text-transform:uppercase">FAQ</h2>
+        <div style="display:flex;flex-direction:column;border-top:1px solid rgba(233,231,223,.22)">
+          <div data-anim="up" data-delay="60" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.22);display:flex;justify-content:space-between;gap:20px;font-size:21px">What ages do you train?<span style="color:#8E9977">+</span></div>
+          <div data-anim="up" data-delay="110" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.22);display:flex;justify-content:space-between;gap:20px;font-size:21px">Which sports do you cover?<span style="color:#8E9977">+</span></div>
+          <div data-anim="up" data-delay="160" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.22);display:flex;justify-content:space-between;gap:20px;font-size:21px">Session length and location?<span style="color:#8E9977">+</span></div>
+          <div data-anim="up" data-delay="210" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.22);display:flex;justify-content:space-between;gap:20px;font-size:21px">What should my athlete bring?<span style="color:#8E9977">+</span></div>
+          <div data-anim="up" data-delay="260" style="padding:26px 0;border-bottom:1px solid rgba(233,231,223,.22);display:flex;justify-content:space-between;gap:20px;font-size:21px">Cancellation policy?<span style="color:#8E9977">+</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:130px 5vw;background:linear-gradient(118deg,#333D22 0%,#556331 44%,#9A8B3C 78%,#C9A63A 100%);color:#E9E7DF;text-align:center">
+      <h2 style="margin:0 auto;max-width:20ch;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(40px,6vw,110px);line-height:.9;text-transform:uppercase">
+        <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="0" style="display:inline-block;line-height:1.12">Your athlete has the talent.</span></span>
+        <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="110" style="display:inline-block;line-height:1.12;background-image:linear-gradient(96deg,#12130F 0%,#3A4527 100%);background-clip:text;color:transparent">Let's build the rest.</span></span>
+      </h2>
+      <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" data-anim="up" data-delay="200" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 14px 40px rgba(0,0,0,.4);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;margin-top:44px;cursor:pointer;padding:22px 40px;background:transparent;color:#E9E7DF;border:1px solid rgba(201,166,58,.6);font-size:14px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Enroll Your Athlete Today</a>
+    </div>
+
+    <div style="padding:90px 5vw 50px;background:#191A16;color:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto;display:grid;grid-template-columns:1.3fr .7fr .7fr 1.2fr;gap:44px">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-family:'Anton',sans-serif;font-size:26px;text-transform:uppercase;line-height:1">Brandon Butler</div>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(233,231,223,.65)">Retired First Sergeant. Coach. Author. No shortcuts.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;color:rgba(233,231,223,.7)">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977;margin-bottom:6px">Pages</div>
+          <div onClick="{{ goHome }}" style="cursor:pointer">Home</div>
+          <div onClick="{{ goBook }}" style="cursor:pointer">The Book</div>
+          <div onClick="{{ goCoaching }}" style="cursor:pointer">Athlete Coaching</div>
+          <div onClick="{{ goPodcast }}" style="cursor:pointer">Podcast</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;color:rgba(233,231,223,.7)">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977;margin-bottom:6px">Connect</div>
+          <div>[Email]</div>
+          <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="color:#E8D998" style="color:inherit">Instagram</a>
+          <a href="https://www.facebook.com/b3astacademy" target="_blank" rel="noopener" style-hover="color:#E8D998" style="color:inherit">Facebook</a>
+          <a href="https://www.tiktok.com/@b3connect_" target="_blank" rel="noopener" style-hover="color:#E8D998" style="color:inherit">TikTok</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977">Join the Mission</div>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(233,231,223,.65)">Newsletter: purpose, training, and what's next.</p>
+          <div style="display:flex;border:1px solid rgba(233,231,223,.3)">
+            <div style="flex:1;padding:16px 18px;font-size:15px;color:rgba(233,231,223,.45)">Your email</div>
+            <div style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent" style="transition:background .35s,color .35s,border-color .35s;cursor:pointer;padding:16px 22px;background:transparent;border-left:1px solid rgba(233,231,223,.3);color:#E9E7DF;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Sign Up</div>
+          </div>
+        </div>
+      </div>
+      <div style="max-width:1500px;margin:60px auto 0;padding-top:24px;border-top:1px solid rgba(233,231,223,.18);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:rgba(233,231,223,.5)">
+        <div>© [Year] Brandon Butler. All rights reserved.</div>
+        <div>Believe. Build. Become.</div>
+      </div>
+    </div>
+
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isPodcast }}" hint-placeholder-val="{{ true }}">
+  <div>
+
+    <div style="position:relative;overflow:hidden;background:radial-gradient(110% 95% at 6% 2%,#2C3321 0%,#191A16 52%,#101109 100%);color:#E9E7DF;min-height:84vh;display:flex;align-items:center;padding:110px 5vw">
+      <image-slot id="bb-podcast-art" style="position:absolute;inset:0;width:100%;height:100%;z-index:0" shape="rect" placeholder="Drop podcast cover art or a studio photo — frame his face toward the right so the headline doesn't cover it"></image-slot>
+      <div style="position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(100deg,#0C0D08 0%,rgba(12,13,8,.92) 30%,rgba(12,13,8,.55) 52%,rgba(12,13,8,.1) 72%,rgba(12,13,8,0) 85%)"></div>
+      <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:32px;max-width:640px">
+        <div data-anim="up" style="font-size:12px;font-weight:700;letter-spacing:.36em;text-transform:uppercase;color:#C9A63A">The Podcast</div>
+        <h1 style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(46px,7vw,124px);line-height:.88;text-transform:uppercase;letter-spacing:-.02em">
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="0" style="display:inline-block;line-height:1.12">The Built to</span></span>
+          <br />
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="100" style="display:inline-block;line-height:1.12;background-image:linear-gradient(96deg,#C9A63A 0%,#EBDC9A 55%,#C9A63A 100%);background-clip:text;color:transparent">Become Podcast</span></span>
+        </h1>
+        <p data-anim="up" data-delay="190" style="margin:0;max-width:54ch;font-size:22px;line-height:1.48;letter-spacing:-.005em;color:rgba(233,231,223,.78)">Straight conversations about purpose, transition, and leadership — no filler, no fluff. Hosted by Coach Brandon Butler.</p>
+        <div data-anim="up" data-delay="260" style="display:flex;gap:12px;flex-wrap:wrap">
+          <div style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,box-shadow .35s;cursor:pointer;padding:18px 28px;background:transparent;border:1px solid rgba(233,231,223,.45);color:#E9E7DF;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Listen on Spotify</div>
+          <div style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;cursor:pointer;padding:18px 28px;background:transparent;border:1px solid rgba(233,231,223,.45);color:#E9E7DF;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Apple Podcasts</div>
+          <div style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;cursor:pointer;padding:18px 28px;background:transparent;border:1px solid rgba(233,231,223,.45);color:#E9E7DF;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Watch on YouTube</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#E9E7DF">
+      <div style="max-width:1300px;margin:0 auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:60px">
+        <h2 data-anim="up" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,4.6vw,82px);line-height:.92;text-transform:uppercase">About the Show</h2>
+        <div style="display:flex;flex-direction:column;gap:24px">
+          <p data-anim="up" data-delay="80" style="margin:0;max-width:62ch;font-size:20px;line-height:1.6;color:rgba(25,26,22,.78)">Conversations with athletes, leaders, coaches, and people in the middle of a transition. Same Believe, Build, Become spirit as the book, in audio form.</p>
+          <p data-anim="up" data-delay="140" style="margin:0;max-width:62ch;font-size:19px;line-height:1.65;color:rgba(25,26,22,.62)">New episodes [weekly / biweekly]. Guests are athletes, coaches, veterans, and people mid-transition — same rule as everywhere else on this site: no script, no fluff.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#191A16;color:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto">
+        <h2 data-anim="up" style="margin:0 0 50px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,4.6vw,82px);line-height:.94;text-transform:uppercase">Latest Episodes</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(233,231,223,.2)">
+          <div data-anim="up" data-delay="70" style="background:#191A16;padding:0 0 34px;display:flex;flex-direction:column">
+            <div style="position:relative;aspect-ratio:16 / 9;background:rgba(233,231,223,.08)"><image-slot id="bb-ep-01" style="width:100%;height:100%" shape="rect" placeholder="Episode 01 art"></image-slot></div>
+            <div style="padding:28px 26px 0;display:flex;flex-direction:column;gap:14px">
+              <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977">Episode 01 · [Run time]</div>
+              <div style="font-family:'Anton',sans-serif;font-size:26px;line-height:1.05;text-transform:uppercase">[Episode Title]</div>
+              <p style="margin:0;font-size:17px;line-height:1.55;color:rgba(233,231,223,.72)">[Guest name] on [one-line description of what the episode covers].</p>
+              <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977;cursor:pointer">Listen Now →</div>
+            </div>
+          </div>
+          <div data-anim="up" data-delay="150" style="background:#191A16;padding:0 0 34px;display:flex;flex-direction:column">
+            <div style="position:relative;aspect-ratio:16 / 9;background:rgba(233,231,223,.08)"><image-slot id="bb-ep-02" style="width:100%;height:100%" shape="rect" placeholder="Episode 02 art"></image-slot></div>
+            <div style="padding:28px 26px 0;display:flex;flex-direction:column;gap:14px">
+              <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977">Episode 02 · [Run time]</div>
+              <div style="font-family:'Anton',sans-serif;font-size:26px;line-height:1.05;text-transform:uppercase">[Episode Title]</div>
+              <p style="margin:0;font-size:17px;line-height:1.55;color:rgba(233,231,223,.72)">[Guest name] on [one-line description of what the episode covers].</p>
+              <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977;cursor:pointer">Listen Now →</div>
+            </div>
+          </div>
+          <div data-anim="up" data-delay="230" style="background:#191A16;padding:0 0 34px;display:flex;flex-direction:column">
+            <div style="position:relative;aspect-ratio:16 / 9;background:rgba(233,231,223,.08)"><image-slot id="bb-ep-03" style="width:100%;height:100%" shape="rect" placeholder="Episode 03 art"></image-slot></div>
+            <div style="padding:28px 26px 0;display:flex;flex-direction:column;gap:14px">
+              <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977">Episode 03 · [Run time]</div>
+              <div style="font-family:'Anton',sans-serif;font-size:26px;line-height:1.05;text-transform:uppercase">[Episode Title]</div>
+              <p style="margin:0;font-size:17px;line-height:1.55;color:rgba(233,231,223,.72)">[Guest name] on [one-line description of what the episode covers].</p>
+              <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977;cursor:pointer">Listen Now →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:44px">
+          <h2 data-anim="up" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,4.6vw,82px);line-height:.94;text-transform:uppercase">What's Coming Up</h2>
+          <div data-anim="up" data-delay="80" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;cursor:pointer;padding:18px 30px;background:transparent;border:1px solid rgba(25,26,22,.35);color:#191A16;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Get Notified</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:rgba(25,26,22,.16);border-top:2px solid #191A16">
+          <div data-anim="up" data-delay="70" style="background:#E9E7DF;padding:30px 26px 34px;display:flex;flex-direction:column;gap:16px;min-height:280px">
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><span style="padding:6px 12px;background:#191A16;color:#E9E7DF;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Podcast</span><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(25,26,22,.55)">Coming Soon</span></div>
+            <div style="font-family:'Anton',sans-serif;font-size:26px;line-height:1.05;text-transform:uppercase">New Episode: [Guest Name]</div>
+            <p style="margin:0;font-size:17px;line-height:1.55;color:rgba(25,26,22,.7)">Brandon sits down with [Guest] to talk [topic].</p>
+            <div style="margin-top:auto;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#4A5535;cursor:pointer">Get Notified →</div>
+          </div>
+          <div data-anim="up" data-delay="140" style="background:#E9E7DF;padding:30px 26px 34px;display:flex;flex-direction:column;gap:16px;min-height:280px">
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><span style="padding:6px 12px;background:#191A16;color:#E9E7DF;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Podcast</span><span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(25,26,22,.55)">Coming Soon</span></div>
+            <div style="font-family:'Anton',sans-serif;font-size:26px;line-height:1.05;text-transform:uppercase">Guest Reveal</div>
+            <p style="margin:0;font-size:17px;line-height:1.55;color:rgba(25,26,22,.7)">[Tease the next guest before the episode drops.]</p>
+            <div style="margin-top:auto;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#4A5535;cursor:pointer">Get Notified →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:110px 5vw;background:#191A16;color:#E9E7DF">
+      <div style="max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:36px">
+        <h2 data-anim="up" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(30px,3.4vw,58px);line-height:.98;text-transform:uppercase">Where to Listen</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;background:rgba(233,231,223,.2)">
+          <div data-anim="up" data-delay="60" style="background:#191A16;padding:34px 26px;font-size:20px;font-weight:600;cursor:pointer">Spotify</div>
+          <div data-anim="up" data-delay="110" style="background:#191A16;padding:34px 26px;font-size:20px;font-weight:600;cursor:pointer">Apple Podcasts</div>
+          <div data-anim="up" data-delay="160" style="background:#191A16;padding:34px 26px;font-size:20px;font-weight:600;cursor:pointer">YouTube</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#4A5535;color:#E9E7DF">
+      <div style="max-width:1400px;margin:0 auto">
+        <h2 data-anim="up" style="margin:0 0 46px;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(32px,3.8vw,64px);line-height:.96;text-transform:uppercase">Listener Reviews</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px">
+          <div data-anim="up" data-delay="70" style="border-top:1px solid rgba(233,231,223,.35);padding-top:24px;display:flex;flex-direction:column;gap:16px"><p style="margin:0;font-family:'Instrument Serif',serif;font-size:25px;line-height:1.3">"[Listener quote.]"</p><div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(233,231,223,.7)">[Listener]</div></div>
+          <div data-anim="up" data-delay="140" style="border-top:1px solid rgba(233,231,223,.35);padding-top:24px;display:flex;flex-direction:column;gap:16px"><p style="margin:0;font-family:'Instrument Serif',serif;font-size:25px;line-height:1.3">"[Listener quote.]"</p><div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(233,231,223,.7)">[Listener]</div></div>
+          <div data-anim="up" data-delay="210" style="border-top:1px solid rgba(233,231,223,.35);padding-top:24px;display:flex;flex-direction:column;gap:16px"><p style="margin:0;font-family:'Instrument Serif',serif;font-size:25px;line-height:1.3">"[Listener quote.]"</p><div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(233,231,223,.7)">[Listener]</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:120px 5vw;background:#E9E7DF">
+      <div style="max-width:900px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:26px;align-items:center">
+        <h2 data-anim="up" style="margin:0;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(36px,4.6vw,84px);line-height:.94;text-transform:uppercase">Never Miss an Episode</h2>
+        <p data-anim="up" data-delay="80" style="margin:0;max-width:56ch;font-size:19px;line-height:1.6;color:rgba(25,26,22,.72)">Get new episodes, guest announcements, and behind-the-scenes updates straight to your inbox.</p>
+        <div data-anim="up" data-delay="140" style="display:flex;width:100%;max-width:520px;border:1px solid rgba(25,26,22,.35)">
+          <div style="flex:1;padding:18px 20px;text-align:left;font-size:16px;color:rgba(25,26,22,.45)">Your email</div>
+          <div style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent" style="transition:background .35s,color .35s,border-color .35s;cursor:pointer;padding:18px 26px;background:transparent;border-left:1px solid rgba(25,26,22,.35);color:#191A16;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Subscribe</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:130px 5vw;background:radial-gradient(100% 120% at 50% 110%,#3A4527 0%,#191A16 55%,#101109 100%);color:#E9E7DF;text-align:center">
+      <h2 style="margin:0 auto;max-width:22ch;font-family:'Anton',sans-serif;letter-spacing:-.025em;font-size:clamp(38px,5.6vw,104px);line-height:.9;text-transform:uppercase">
+        <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="0" style="display:inline-block;line-height:1.12">New conversations.</span></span>
+        <span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 0 .16em;margin-bottom:-.16em"><span data-anim="rise" data-delay="100" style="display:inline-block;line-height:1.12;background-image:linear-gradient(96deg,#C9A63A 0%,#EBDC9A 55%,#C9A63A 100%);background-clip:text;color:transparent">Same mission.</span></span>
+      </h2>
+      <div data-anim="up" data-delay="190" style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent;box-shadow:0 12px 34px rgba(110,127,58,.32);transform:translateY(-3px)" style="transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,color .35s,border-color .35s,box-shadow .35s;display:inline-block;margin-top:40px;cursor:pointer;padding:22px 40px;background:transparent;border:1px solid rgba(233,231,223,.45);color:#E9E7DF;white-space:nowrap;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase">Subscribe Now</div>
+    </div>
+
+    <div style="padding:90px 5vw 50px;background:#191A16;color:#E9E7DF">
+      <div style="max-width:1500px;margin:0 auto;display:grid;grid-template-columns:1.3fr .7fr .7fr 1.2fr;gap:44px">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-family:'Anton',sans-serif;font-size:26px;text-transform:uppercase;line-height:1">Brandon Butler</div>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(233,231,223,.65)">Retired First Sergeant. Coach. Author. No shortcuts.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;color:rgba(233,231,223,.7)">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977;margin-bottom:6px">Pages</div>
+          <div onClick="{{ goHome }}" style="cursor:pointer">Home</div>
+          <div onClick="{{ goBook }}" style="cursor:pointer">The Book</div>
+          <div onClick="{{ goCoaching }}" style="cursor:pointer">Athlete Coaching</div>
+          <div onClick="{{ goPodcast }}" style="cursor:pointer">Podcast</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;color:rgba(233,231,223,.7)">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977;margin-bottom:6px">Connect</div>
+          <div>[Email]</div>
+          <a href="https://www.instagram.com/b3connect_" target="_blank" rel="noopener" style-hover="color:#E8D998" style="color:inherit">Instagram</a>
+          <a href="https://www.facebook.com/b3astacademy" target="_blank" rel="noopener" style-hover="color:#E8D998" style="color:inherit">Facebook</a>
+          <a href="https://www.tiktok.com/@b3connect_" target="_blank" rel="noopener" style-hover="color:#E8D998" style="color:inherit">TikTok</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8E9977">Join the Mission</div>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(233,231,223,.65)">Newsletter: purpose, training, and what's next.</p>
+          <div style="display:flex;border:1px solid rgba(233,231,223,.3)">
+            <div style="flex:1;padding:16px 18px;font-size:15px;color:rgba(233,231,223,.45)">Your email</div>
+            <div style-hover="background:linear-gradient(102deg,#9FAE52 0%,#C9A63A 52%,#E8D998 100%);color:#14150F;border-color:transparent" style="transition:background .35s,color .35s,border-color .35s;cursor:pointer;padding:16px 22px;background:transparent;border-left:1px solid rgba(233,231,223,.3);color:#E9E7DF;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Sign Up</div>
+          </div>
+        </div>
+      </div>
+      <div style="max-width:1500px;margin:60px auto 0;padding-top:24px;border-top:1px solid rgba(233,231,223,.18);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:rgba(233,231,223,.5)">
+        <div>© [Year] Brandon Butler. All rights reserved.</div>
+        <div>Believe. Build. Become.</div>
+      </div>
+    </div>
+
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startPage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;book&quot;,&quot;coaching&quot;,&quot;podcast&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;animateText&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { page: props.startPage || 'home', navOpen: false };
+  }
+
+  componentDidMount() {
+    this.seen = new WeakSet();
+    this.watched = new WeakSet();
+    this.scan();
+    this.bindVideos();
+    const settle = () => requestAnimationFrame(() => this.rebuild());
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(settle); else setTimeout(settle, 120);
+    this.failsafe = setTimeout(() => { if (!this.ioFired) this.revealAll(); }, 700);
+    this.onPrint = () => this.revealAll();
+    window.addEventListener('beforeprint', this.onPrint);
+  }
+  componentDidUpdate() { this.scan(); this.bindVideos(); }
+  componentWillUnmount() {
+    if (this.io) { this.io.disconnect(); this.io = null; }
+    if (this.vidIo) { this.vidIo.disconnect(); this.vidIo = null; }
+    if (this.failsafe) clearTimeout(this.failsafe);
+    if (this.onPrint) window.removeEventListener('beforeprint', this.onPrint);
+  }
+
+  rebuild() {
+    if (this.io) { this.io.disconnect(); this.io = null; }
+    this.watched = new WeakSet();
+    this.scan();
+  }
+
+  go(page) {
+    return () => {
+      this.setState({ page: page, navOpen: false });
+      if (this.io) { this.io.disconnect(); this.io = null; }
+      this.watched = new WeakSet();
+      window.scrollTo(0, 0);
+      const sc = document.scrollingElement; if (sc) sc.scrollTop = 0;
+    };
+  }
+
+  toggleNav() {
+    this.setState((s) => ({ navOpen: !s.navOpen }));
+  }
+
+  scrollToMission() {
+    const root = this.rootEl();
+    const el = root && root.querySelector('#bb-mission');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  motionOk() {
+    if (this.props.animateText === false) return false;
+    if (typeof document !== 'undefined' && document.hidden) return false;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+    if (window.matchMedia && window.matchMedia('print').matches) return false;
+    return true;
+  }
+
+  revealAll() {
+    if (this.io) { this.io.disconnect(); this.io = null; }
+    const root = this.rootEl();
+    if (!root) return;
+    Array.prototype.forEach.call(root.querySelectorAll('[data-anim]'), (el) => {
+      el.style.transitionDelay = '0s';
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    });
+  }
+
+  scan() {
+    if (!this.motionOk()) { this.revealAll(); return; }
+    const root = this.rootEl();
+    if (!root) return;
+    const nodes = root.querySelectorAll('[data-anim]');
+    if (!this.seen) this.seen = new WeakSet();
+    if (!this.io || !this.watched) {
+      this.watched = new WeakSet();
+      this.io = new IntersectionObserver((entries) => {
+        this.ioFired = true;
+        entries.forEach((e) => {
+          const targets = e.target.hasAttribute('data-anim')
+            ? [e.target]
+            : Array.prototype.slice.call(e.target.querySelectorAll('[data-anim]'));
+          targets.forEach((el) => {
+            const d = parseInt(el.getAttribute('data-delay') || '0', 10);
+            const kind = el.getAttribute('data-anim');
+            if (e.isIntersecting) {
+              el.style.transitionDelay = (d / 1000) + 's';
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+            } else {
+              el.style.transitionDelay = '0s';
+              el.style.opacity = '0';
+              el.style.transform = kind === 'rise' ? 'translateY(130%)' : 'translateY(26px)';
+            }
+          });
+        });
+      }, { threshold: 0, rootMargin: '0px 0px -6% 0px' });
+    }
+    nodes.forEach((el) => {
+      const first = !this.seen.has(el);
+      if (first) this.seen.add(el);
+      const kind = el.getAttribute('data-anim');
+      const dur = kind === 'rise' ? '.95s' : '.8s';
+      el.style.willChange = 'transform, opacity';
+      el.style.transition = 'transform ' + dur + ' cubic-bezier(.16,1,.3,1), opacity ' + dur + ' cubic-bezier(.16,1,.3,1)';
+      if (first) {
+        requestAnimationFrame(() => {
+          if (!this.motionOk()) return;
+          el.style.opacity = '0';
+          el.style.transform = kind === 'rise' ? 'translateY(130%)' : 'translateY(26px)';
+        });
+      }
+      const parent = el.parentElement;
+      const isMasked = kind === 'rise' && parent && getComputedStyle(parent).overflow === 'hidden';
+      const watch = isMasked ? parent : el;
+      if (!this.watched.has(watch)) {
+        this.watched.add(watch);
+        this.io.observe(watch);
+      }
+    });
+  }
+
+  rootEl() {
+    if (this._root && this._root.isConnected) return this._root;
+    this._root = document.querySelector('x-dc') || document.body;
+    return this._root;
+  }
+
+  bindVideos() {
+    const root = this.rootEl();
+    if (!root) return;
+    if (!this.vidIo) {
+      this.vidIo = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          const v = e.target;
+          if (v.dataset.loop === 'always') return;
+          if (e.isIntersecting) {
+            if (v.dataset.userPaused !== '1' && v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+          } else { v.muted = true; if (!v.paused) v.pause(); }
+        });
+      }, { threshold: 0.35 });
+    }
+    Array.prototype.forEach.call(root.querySelectorAll('video'), (v) => {
+      if (!v.dataset.vidBound) {
+        v.dataset.vidBound = '1';
+        v.addEventListener('play', () => this.syncBadge(v));
+        v.addEventListener('pause', () => this.syncBadge(v));
+        this.vidIo.observe(v);
+      }
+      this.syncBadge(v);
+    });
+  }
+
+  syncBadge(v) {
+    const wrap = v.parentElement;
+    if (!wrap) return;
+    const b = wrap.querySelector('[data-role="pp"]');
+    if (b) b.textContent = v.paused ? '▶' : '❚❚';
+  }
+
+  onVideoTap(ev) {
+    const wrap = ev.currentTarget;
+    const vid = wrap.querySelector('video');
+    if (!vid) return;
+    const root = this.rootEl();
+    if (root) {
+      Array.prototype.forEach.call(root.querySelectorAll('video'), (v) => {
+        if (v !== vid && v.dataset.loop !== 'always') { v.muted = true; if (!v.paused) { v.pause(); this.syncBadge(v); } }
+      });
+    }
+    if (vid.paused) {
+      vid.dataset.userPaused = '0';
+      vid.muted = false;
+      const p = vid.play();
+      if (p && p.catch) p.catch(() => { vid.muted = true; const r = vid.play(); if (r && r.catch) r.catch(() => {}); });
+    } else {
+      vid.dataset.userPaused = '1';
+      vid.pause();
+      vid.muted = true;
+    }
+    this.syncBadge(vid);
+  }
+
+  renderVals() {
+    const p = this.state.page;
+    return {
+      isHome: p === 'home',
+      isBook: p === 'book',
+      isCoaching: p === 'coaching',
+      isPodcast: p === 'podcast',
+      goHome: this.go('home'),
+      goBook: this.go('book'),
+      goCoaching: this.go('coaching'),
+      goPodcast: this.go('podcast'),
+      onVideoTap: (ev) => this.onVideoTap(ev),
+      navOpen: this.state.navOpen,
+      toggleNav: () => this.toggleNav(),
+      scrollToMission: () => this.scrollToMission()
+    };
+  }
+}
+</script>
+</body>
+</html>
